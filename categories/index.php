@@ -199,6 +199,7 @@
 		</form>
 
 	</div>
+	<a href="../index.php">A</a>
 	<script type="text/javascript">
 		function edit(id,name,description,status)
 		{	
