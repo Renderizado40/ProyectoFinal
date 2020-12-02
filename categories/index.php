@@ -1,9 +1,27 @@
 <?php 
 	
+	if (isset($_POST['action'])) {
+	
+		if (!isset($_POST['token']) && $_POST['token']==$_SESSION['token']) {
+			$authController = new AuthController();
+			switch (variable) {
+				case 'action':
+					
+				break;
+			}
+		}else{
+			$_SESSION['error'] = 'de seguridad';
+			header("Location:". $_SERVER['HTTP_REFERER']);
+		}
+	}
 	include "../app/categoryController.php";
 	$categoryController = new CategoryController();
 
 	$categories = $categoryController->get();
+
+	// if (isset($_SESSION) == false || isset($_SESSION['id'] == false)){
+	// 	header("Location:../");
+	// }
 
 	#echo json_encode($categories);
 ?>
@@ -122,7 +140,7 @@
 			</tbody>
 		</table>
 
-		<form id="storeForm" action="../app/categoryController.php" method="POST">
+		<form id="storeForm" action="../category" method="POST">
 			<fieldset>
 				
 				<legend>
@@ -152,11 +170,12 @@
 
 				<button type="submit" >Save Category</button>
 				<input type="hidden" name="action" value="store">
+				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
 
 			</fieldset>
 		</form>
 
-		<form id="updateForm" action="../app/categoryController.php" method="POST">
+		<form id="updateForm" action="../category" method="POST">
 			<fieldset>
 				
 				<legend>
@@ -187,14 +206,16 @@
 				<button type="submit" >Save Category</button>
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="id" id="id">
+				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
 
 			</fieldset>
 		</form>
 
-		<form id="destroyForm" action="../app/categoryController.php" method="POST">
+		<form id="destroyForm" action="../category" method="POST">
 
 			<input type="hidden" name="action" value="destroy">
 			<input type="hidden" name="id" id="id_destroy">
+			<input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
 
 		</form>
 
